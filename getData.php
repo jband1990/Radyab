@@ -1,4 +1,7 @@
 <?php
+//connect to the database
+$connection= mysqli_connect('localhost','root','');
+mysqli_select_db($connection,'radyab');
 //file_get_contents('device/00001.txt');
 //file_get_contents('device/00001.txt'));
 $list= scandir('device');
