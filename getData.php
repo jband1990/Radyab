@@ -47,7 +47,7 @@ foreach ($list as $file){
         '" . $listPosition[$index][1] . "','" . $listPosition[$index][2] . "','" . $listPosition[$index][7] . "','" . $date . "');
         ");
     }
-
+//
     //var_dump($listPosition);
     //die();
 }
