@@ -1,4 +1,5 @@
 <?php
+//phpinfo();
 //connect to the database
 $connection= mysqli_connect('localhost','root','');
 mysqli_select_db($connection,'radyab');
@@ -16,23 +17,37 @@ unset($list[1]);
 //seperate recivied locations
 foreach ($list as $file){
     $content=file_get_contents('device/'.$file);
-        $listPosition=explode('---',$content);
+    $listPosition=explode('---',$content);
+
         //var_dump($content);
     //var_dump($listPosition);
     //die();
-    foreach ($listPosition as $index => $position){
-        $listPosition [$index]= explode(',',$position);
+    foreach ($listPosition as $index => $position) {
+
+
+        // print ($position);
+        $listPosition [$index] = explode(',', $position);
+        //print_r ($listPosition[$index]);
+        //print ("<br/>");
         //seprate date and time with preg_match
-       ;
-        preg_match('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/', $listPosition [$index][4],$result);
-        $date=$result[1].'-'.$result[2].'-'.$result[3].' '.$result[4].':'.$result[5].':'.$result[6];
-        var_dump($date);
-        die();
+
+        preg_match('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/', $listPosition [$index][4], $result);
+        //print_r($result);
+        $date = $result[1] . '-' . $result[2] . '-' . $result[3] . ' ' . $result[4] . ':' . $result[5] . ':' . $result[6];
+        // die();
+
+        mysqli_query($connection, "INSERT INTO `position`(
+
+            `longitude`,
+            `latitiude`,
+            `speed`,
+            `createDate`
+    )
+    VALUES (
+        '" . $listPosition[$index][1] . "','" . $listPosition[$index][2] . "','" . $listPosition[$index][7] . "','" . $date . "');
+        ");
     }
-   /* mysqli_query(INSERT INTO `position`
-    (`longitude`, `latitiude`, `speed`, `createDate`)
-    VALUES ('2', '3', '4', '2019-10-16 00:00:00');)
-   */
+
     //var_dump($listPosition);
     //die();
 }
