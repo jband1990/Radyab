@@ -67,7 +67,7 @@
            '".$device['id']."','".round($longitude,5)."','".round($latitude,5)."','" . $listPosition[$index][7] . "','" . $date . "');
             ");
         }
-    //
+        unlink('device/'.$file);
         //var_dump($listPosition);
         //die();
     }
