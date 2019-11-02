@@ -49,16 +49,22 @@
             //print_r($result);
             $date = $result[1] . '-' . $result[2] . '-' . $result[3] . ' ' . $result[4] . ':' . $result[5] . ':' . $result[6];
             // die();
+            //change lat & lang to google coordination
+            $longitude = substr($listPosition[$index][1],0,2)+substr($listPosition[$index][1],2,6)/60;
+            $latitude = substr($listPosition[$index][2],0,2)+substr($listPosition[$index][2],2,6)/60;
+            var_dump(round($longitude,5));
+            var_dump(round($latitude,5));
+
 
             mysqli_query($connection, "INSERT INTO `position`(
                 `deviceId`,
                 `longitude`,
-                `latitiude`,
+                `latitude`,
                 `speed`,
                 `createDate`
         )
         VALUES (
-           '".$device['id']."','" . $listPosition[$index][1] . "','" . $listPosition[$index][2] . "','" . $listPosition[$index][7] . "','" . $date . "');
+           '".$device['id']."','".round($longitude,5)."','".round($latitude,5)."','" . $listPosition[$index][7] . "','" . $date . "');
             ");
         }
     //
