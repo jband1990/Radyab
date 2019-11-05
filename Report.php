@@ -11,10 +11,38 @@
             {
                 var map = new Microsoft.Maps.Map('#map',{
                 credentials: 'ArEIhVba9nPri81YH_rHpDnvhCUtUn7WdKUte8NR5paEfk_iH9sfrF796EtOAO_L',
-                    center: new Microsoft.Maps.Location(32.622315,51.671060 ),
-                    mapTypeId: Microsoft.Maps.MapTypeId.road,
+                    center: new Microsoft.Maps.Location(32.62506,51.68601 ),
                     zoom: 5
             });
+               /* var center = map.getCenter();
+
+                //Create array of locations
+                var coords = [center, new Microsoft.Maps.Location(center.latitude + 1, center.longitude + 1)];
+
+                //Create a polyline
+                var line = new Microsoft.Maps.Polyline(coords, {
+                    strokeColor: 'red',
+                    strokeThickness: 3,
+                    strokeDashArray: [4, 4]
+                });
+
+                //Add the polyline to map
+                map.entities.push(line);
+                */
+                Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+                    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+                    // Set Route Mode to driving
+                    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Company', location: new Microsoft.Maps.Location(32.62274,51.66437) });
+                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'SaadatAbad', location: new Microsoft.Maps.Location(32.64788,51.66798) });
+                    directionsManager.addWaypoint(waypoint1);
+                    directionsManager.addWaypoint(waypoint2);
+                    // Set the element in which the itinerary will be rendered
+                    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+                    directionsManager.calculateDirections();
+                });
+
+
             }
     </script>
     <style>
@@ -36,5 +64,6 @@
 <body>
 <div class="controll"></div>
 <div class="map" id="map"></div>
+<div id="printoutPanel"></div>
 </body>
 </html>
