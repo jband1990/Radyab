@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>directionscreatedrivingrouteHTML</title>
+    <title>directionsaddwaypointHTML</title>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <style type='text/css'>body{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
 </head>
@@ -13,17 +13,20 @@
     function loadMapScenario() {
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
             /* No need to set credentials if already passed in URL */
-            center: new Microsoft.Maps.Location(32.62506,51.68601),
+            center: new Microsoft.Maps.Location(32.62506, 51.68601),
             zoom: 12
         });
         Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
             var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-            // Set Route Mode to driving
-            directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-            var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Redmond', location: new Microsoft.Maps.Location(32.62274,51.66437) });
-            var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'Seattle', location: new Microsoft.Maps.Location(32.64788,51.66798) });
-            directionsManager.addWaypoint(waypoint1);
-            directionsManager.addWaypoint(waypoint2);
+            if (directionsManager.getAllWaypoints().length < 2) {
+                directionsManager.clearAll();
+                var seattleWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: 'Seattle, WA' });
+                directionsManager.addWaypoint(seattleWaypoint);
+                var tacomaWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: 'Tacoma, WA', location: new Microsoft.Maps.Location(32.62274, 51.66437) });
+                directionsManager.addWaypoint(tacomaWaypoint);
+            }
+            // Insert a waypoint
+            directionsManager.addWaypoint(new Microsoft.Maps.Directions.Waypoint({ address: 'Issaquah, WA', location: new Microsoft.Maps.Location(32.64788, 51.66798) }), 1);
             // Set the element in which the itinerary will be rendered
             directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
             directionsManager.calculateDirections();

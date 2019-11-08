@@ -11,7 +11,7 @@
             {
                 var map = new Microsoft.Maps.Map('#map',{
                 credentials: 'ArEIhVba9nPri81YH_rHpDnvhCUtUn7WdKUte8NR5paEfk_iH9sfrF796EtOAO_L',
-                    center: new Microsoft.Maps.Location(32.62506,51.68601 ),
+                    center: new Microsoft.Maps.Location(40.76414,-74.07132 ),
                     zoom: 5
             });
                /* var center = map.getCenter();
@@ -33,8 +33,8 @@
                     var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
                     // Set Route Mode to driving
                     directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Company', location: new Microsoft.Maps.Location(32.62274,51.66437) });
-                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'SaadatAbad', location: new Microsoft.Maps.Location(32.64788,51.66798) });
+                    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: 'Company', location: new Microsoft.Maps.Location(40.77503,-74.05976) });
+                    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: 'SaadatAbad', location: new Microsoft.Maps.Location(40.78815,-74.04997) });
                     directionsManager.addWaypoint(waypoint1);
                     directionsManager.addWaypoint(waypoint2);
                     // Set the element in which the itinerary will be rendered
