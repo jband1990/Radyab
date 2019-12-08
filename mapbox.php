@@ -6,10 +6,14 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet'/>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v2.0.0/mapbox-gl-directions.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
     <style>
         body {
             margin: 0;
             padding: 0;
+           font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
         }
 
         #map {
@@ -36,7 +40,7 @@
 </head>
 <body>
 <div id='map'></div>
-<script src="scripts/App.js?a=3" >
+<script src="scripts/App.js?a=4" >
 </script>
 </body>
 </html>
