@@ -4,11 +4,16 @@
     <meta charset='utf-8'/>
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet'/>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v2.0.0/mapbox-gl-directions.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=Ur9d5vwfWAXrHbYEMfLN5LOD06o7OdHj"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=Ur9d5vwfWAXrHbYEMfLN5LOD06o7OdHj"></script>
+
     <style>
         body {
             margin: 0;
@@ -28,8 +33,8 @@
     $positions = getAllPosition(8);
     $positionsStr = '';
     while ($row = mysqli_fetch_assoc($positions)) {
-
-      $positionsStr .= '[' .$row["longitude"].','.$row["latitude"].'],';
+//        { latLng: { lat: 32.62217, lng: 51.66471 }}
+      $positionsStr .= '{ latLng: { lat: ' .$row["latitude"].', lng:'.$row["longitude"].'}},';
     }
     $positionsStr ='['.rtrim($positionsStr,',').']';
     ?>
@@ -40,7 +45,7 @@
 </head>
 <body>
 <div id='map'></div>
-<script src="scripts/App.js?a=4" >
+<script src="scripts/mapquest.js?555" >
 </script>
 </body>
 </html>

@@ -11,7 +11,7 @@ map.on('load', function (m) {
     m.directions.setOrigin([51.66554, 32.62231]);
     directions.addWaypoint(0, [51.68629,32.62466 ]);
     directions.addWaypoint(1, [51.70432, 32.63224]);
-    directions.setDestination([51.66554, 32.62231]);
+    directions.setDestination([51.68629,32.62466]);
     // map.addLayer({
     //     "id": "route",
     //     "type": "line",
