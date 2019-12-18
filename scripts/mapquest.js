@@ -7,7 +7,7 @@ var map,
 map = L.map('map', {
     layers: MQ.mapLayer(),
     center: [ 32.62432, 51.68115 ],
-    zoom: 9
+    zoom: 12,
 });
 
 dir = MQ.routing.directions();
@@ -23,5 +23,5 @@ dir.route({
 
 map.addLayer(MQ.routing.routeLayer({
     directions: dir,
-    fitBounds: true
+    //fitBounds: true
 }));
