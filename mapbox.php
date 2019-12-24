@@ -1,7 +1,3 @@
-<?php
-
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet'/>
-<!--    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v2.0.0/mapbox-gl-directions.js'></script>-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v2.0.0/mapbox-gl-directions.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
     <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=Ur9d5vwfWAXrHbYEMfLN5LOD06o7OdHj"></script>
@@ -55,8 +51,11 @@
 //        { latLng: { lat: 32.62217, lng: 51.66471 }}
       $positionsStr .= '{ latLng: { lat: ' .$row["latitude"].', lng:'.$row["longitude"].'}},';
     }
-    $positionsStr ='['.rtrim($positionsStr,',').']';
+//    $positionsStr ='['.rtrim($positionsStr,',').']';
+    $positionsStr='[]';
     $lastposition=lastrecord(8);
+    $TodayDate=TodayTime(8);
+
     ?>
     <script type="text/javascript">
         var devicePositions =  <?=$positionsStr ?>
@@ -68,15 +67,11 @@
 <div class="controll"></div>
 <script src="scripts/mapquest.js?<?= rand(1,5252525)?>" >
 
-</script>    <script> // create a HTML element for each feature
+</script>
+<script> // create a HTML element for each feature
     var el = document.createElement('div');
     el.className = 'marker';
-    L.marker([<?= $lastposition['latitude'].','.$lastposition['longitude']?>]).addTo(map);
-
-    // make a marker for each feature and add to the map
-//    new mapboxgl.Marker(el)
-//        .setLngLat([-77.032, 38.913])
-//        .addTo(map);
+    L.marker([<?= $lastposition['latitude'].','.$lastposition['longitude']?>], { title: "آخرین موقعیت" }).addTo(map);
 
 </script>
 </body>

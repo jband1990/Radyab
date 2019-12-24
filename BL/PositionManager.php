@@ -16,3 +16,10 @@ function lastrecord($deviceId){
     $result=mysqli_fetch_assoc($data);
     return($result);
 }
+
+function TodayTime($deviceid){
+    $query = LoadData('SELECT * FROM `position`where date(createdate)="'.date('y-m-d').'"');
+//    $result=mysqli_query(mysqli_connect('localhost','root',''),'SELECT * FROM `position` where date(createdate)="'.date('y-m-d').'"');
+//   echo(mysqli_num_rows($query));
+//    var_dump(mysqli_fetch_assoc($query));
+}
