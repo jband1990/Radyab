@@ -51,11 +51,10 @@
 //        { latLng: { lat: 32.62217, lng: 51.66471 }}
       $positionsStr .= '{ latLng: { lat: ' .$row["latitude"].', lng:'.$row["longitude"].'}},';
     }
-//    $positionsStr ='['.rtrim($positionsStr,',').']';
-    $positionsStr='[]';
+    $positionsStr ='['.rtrim($positionsStr,',').']';
+//    $positionsStr='[]';
     $lastposition=lastrecord(8);
     $TodayDate=TodayTime(8);
-
     ?>
     <script type="text/javascript">
         var devicePositions =  <?=$positionsStr ?>

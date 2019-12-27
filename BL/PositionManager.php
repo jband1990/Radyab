@@ -18,8 +18,14 @@ function lastrecord($deviceId){
 }
 
 function TodayTime($deviceid){
-    $query = LoadData('SELECT * FROM `position`where date(createdate)="'.date('y-m-d').'"');
-//    $result=mysqli_query(mysqli_connect('localhost','root',''),'SELECT * FROM `position` where date(createdate)="'.date('y-m-d').'"');
-//   echo(mysqli_num_rows($query));
-//    var_dump(mysqli_fetch_assoc($query));
+    $query = LoadData('SELECT * FROM `position`WHERE date(createdate)="' . date('y-m-d') . '"');
+
+    $list=array();
+    while($res=mysqli_fetch_assoc($query)){
+        $list[]=array('lat'=>$res['latitude'],'long'=>$res['longitude']);
+    }
+//    var_dump(json_encode($list));
+//    return($list);
 }
+
+
