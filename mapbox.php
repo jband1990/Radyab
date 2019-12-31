@@ -14,8 +14,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
     <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=Ur9d5vwfWAXrHbYEMfLN5LOD06o7OdHj"></script>
     <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=Ur9d5vwfWAXrHbYEMfLN5LOD06o7OdHj"></script>
-    <link type="text/css" rel="stylesheet" href="Mh1PersianDatePicker.css" />
-    <script type="text/javascript" src="Mh1PersianDatePicker.js"></script>
+    <link rel="stylesheet" href="css/persian-datepicker.min.css"/>
     <style>
         #controll{
             height 20%;
@@ -43,6 +42,9 @@
             border-radius: 50%;
             cursor: pointer;
         }
+        .datePicker{
+            width:200px !important;
+        }
     </style>
     <?php
     require_once './BL/PositionManager.php';
@@ -61,25 +63,33 @@
         var devicePositions =  <?=$positionsStr ?>
 //var devicePositions=[[51.66554,32.62231],[51.67116,32.62212]];
     </script>
-    <script>
-        $(document).ready(function(){
-                $('datepicker').datepicker();
-            }
-        )
-    </script>
 </head>
 <body>
 <div id='map'></div>
 <div class="controll">
     <form>
-        <input type="text" class="datePicker" name="startdate">
-        <input type="text" class="datePicker" name="enddate">
+
+        <label for="enddate">تاریخ پایان</label>
+        <input type="text" class="datePicker" id="startdate">
+        <label for="startdate">تاریخ شروع</label>
+        <input type="text" class="datePicker" id="enddate" >
+<!--        <input type="text" class="date-picker" />-->
+        <script src="scripts/jquery.min.js"></script>
+        <script src="scripts/persian-date.min.js"></script>
+        <script src="scripts/persian-datepicker.min.js"></script>
         <input type="submit"  value="گزارش">
     </form>
 </div>
 <script src="scripts/mapquest.js?<?= rand(1,5252525)?>" >
 </script>
-<script>Mh1PersianDatePicker.Show(this, '1397/12/21'); //parameter1: input, parameter2: today</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".datePicker").pDatepicker({
+            changemonth:true,
+            changeyear:true,
+            initialValue: false});
+    });
+</script>
 <script> // create a HTML element for each feature
     var el = document.createElement('div');
     el.className = 'marker';
