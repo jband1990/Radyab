@@ -43,10 +43,20 @@
             cursor: pointer;
         }
         .datePicker{
-            width:200px !important;
+            width:100px !important;
         }
     </style>
     <?php
+    require_once 'persian_calendar.php';
+    if(isset($_GET['submit'])){
+        echo $_GET['startdate'].' '.$_GET['enddate'];
+        $persian_calendar=new persian_calendar();
+        $startdate=explode('/',$_GET['startdate']);
+        $startdate=$persian_calendar->p2g((int)$startdate[0],(int)$startdate[1],(int)$startdate[2]);
+        $startdate=$persian_calendar->p2g((int)$startdate[0],(int)$startdate[1],(int)$startdate[2]);
+        var_dump($startdate);
+        die();
+    }
     require_once './BL/PositionManager.php';
     $positions = getAllPosition(8);
     $positionsStr = '';
@@ -70,14 +80,14 @@
     <form>
 
         <label for="enddate">تاریخ پایان</label>
-        <input type="text" class="datePicker" id="startdate">
+        <input type="text" class="datePicker" id="startdate" name="startdate">
         <label for="startdate">تاریخ شروع</label>
-        <input type="text" class="datePicker" id="enddate" >
+        <input type="text" class="datePicker" id="enddate" name="enddate" >
 <!--        <input type="text" class="date-picker" />-->
         <script src="scripts/jquery.min.js"></script>
         <script src="scripts/persian-date.min.js"></script>
         <script src="scripts/persian-datepicker.min.js"></script>
-        <input type="submit"  value="گزارش">
+        <input type="submit"  value="گزارش" name="submit">
     </form>
 </div>
 <script src="scripts/mapquest.js?<?= rand(1,5252525)?>" >
@@ -85,9 +95,9 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".datePicker").pDatepicker({
-            changemonth:true,
-            changeyear:true,
-            initialValue: false});
+            initialValue: false,
+            "format":"l"
+    });
     });
 </script>
 <script> // create a HTML element for each feature
