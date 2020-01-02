@@ -49,11 +49,13 @@
     <?php
     require_once 'persian_calendar.php';
     if(isset($_GET['submit'])){
-        echo $_GET['startdate'].' '.$_GET['enddate'];
         $persian_calendar=new persian_calendar();
-        $startdate=explode('/',$_GET['startdate']);
-        $startdate=$persian_calendar->p2g((int)$startdate[0],(int)$startdate[1],(int)$startdate[2]);
-        $startdate=$persian_calendar->p2g((int)$startdate[0],(int)$startdate[1],(int)$startdate[2]);
+        $startdate=$persian_calendar->convert($_GET['startdate']);
+        $enddate=$persian_calendar->convert($_GET['enddate']);
+        echo $startdate.'  '.$enddate;
+
+        $startdate = explode('/',$persian_calendar->convert($_GET['startdate']));
+        $startdate = $persian_calendar->p2g(( $startdate[0]),($startdate[1]),($startdate[2]));
         var_dump($startdate);
         die();
     }
@@ -96,8 +98,9 @@
     $(document).ready(function() {
         $(".datePicker").pDatepicker({
             initialValue: false,
-            "format":"l"
-    });
+            "format":"l",'persianDigit':true
+
+        });
     });
 </script>
 <script> // create a HTML element for each feature
