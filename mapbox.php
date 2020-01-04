@@ -52,12 +52,16 @@
         $persian_calendar=new persian_calendar();
         $startdate=$persian_calendar->convert($_GET['startdate']);
         $enddate=$persian_calendar->convert($_GET['enddate']);
-        echo $startdate.'  '.$enddate;
 
         $startdate = explode('/',$persian_calendar->convert($_GET['startdate']));
         $startdate = $persian_calendar->p2g(( $startdate[0]),($startdate[1]),($startdate[2]));
-        var_dump($startdate);
-        die();
+        $startdate = $startdate[0].'/'.$startdate[1].'/'.$startdate[2];
+
+        $enddate = explode('/',$persian_calendar->convert($_GET['$enddate']));
+        $enddate = $persian_calendar->p2g(( $enddate[0]),($enddate[1]),($enddate[2]));
+        $enddate = $enddate[0].'/'.$enddate[1].'/'.$enddate[2];
+        echo $startdate.' '.$enddate;
+
     }
     require_once './BL/PositionManager.php';
     $positions = getAllPosition(8);
@@ -79,12 +83,12 @@
 <body>
 <div id='map'></div>
 <div class="controll">
-    <form>
+    <form >
 
         <label for="enddate">تاریخ پایان</label>
-        <input type="text" class="datePicker" id="startdate" name="startdate">
+        <input type="text" class="datePicker" id="startdate" name="startdate" autocomplete="off" >
         <label for="startdate">تاریخ شروع</label>
-        <input type="text" class="datePicker" id="enddate" name="enddate" >
+        <input type="text" class="datePicker" id="enddate" name="enddate"  autocomplete="off" >
 <!--        <input type="text" class="date-picker" />-->
         <script src="scripts/jquery.min.js"></script>
         <script src="scripts/persian-date.min.js"></script>
@@ -99,6 +103,7 @@
         $(".datePicker").pDatepicker({
             initialValue: false,
             "format":"l",'persianDigit':true
+
 
         });
     });
