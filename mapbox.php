@@ -47,23 +47,30 @@
         }
     </style>
     <?php
+    require_once './BL/PositionManager.php';
     require_once 'persian_calendar.php';
     if(isset($_GET['submit'])){
         $persian_calendar=new persian_calendar();
         $startdate=$persian_calendar->convert($_GET['startdate']);
         $enddate=$persian_calendar->convert($_GET['enddate']);
-
-        $startdate = explode('/',$persian_calendar->convert($_GET['startdate']));
-        $startdate = $persian_calendar->p2g(( $startdate[0]),($startdate[1]),($startdate[2]));
-        $startdate = $startdate[0].'/'.$startdate[1].'/'.$startdate[2];
-
-        $enddate = explode('/',$persian_calendar->convert($_GET['$enddate']));
-        $enddate = $persian_calendar->p2g(( $enddate[0]),($enddate[1]),($enddate[2]));
-        $enddate = $enddate[0].'/'.$enddate[1].'/'.$enddate[2];
-        echo $startdate.' '.$enddate;
-
+        $startdate = explode('/', $startdate);
+        $enddate = explode('/', $enddate);
+        if((is_array ($startdate)) && (count($startdate)==3)) {
+            $startdate = $persian_calendar->p2g(($startdate[0]), ($startdate[1]), ($startdate[2]));
+            $startdate = $startdate[0] . '/' . $startdate[1] . '/' . $startdate[2];
+        }else{
+            $startdate='';
+        }
+        if((is_array ($enddate)) && (count($enddate)==3)) {
+            $enddate = $persian_calendar->p2g(($enddate[0]), ($enddate[1]), ($enddate[2]));
+            $enddate = $enddate[0] . '/' . $enddate[1] . '/' . $enddate[2];
+        }else{
+            $enddate='';
+        }
+        $query = LoadData('SELECT * FROM `position`WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
+    }else{
+        $query = LoadData('SELECT * FROM `position`WHERE date(createdate)="' . date('y-m-d') . '"');
     }
-    require_once './BL/PositionManager.php';
     $positions = getAllPosition(8);
     $positionsStr = '';
     while ($row = mysqli_fetch_assoc($positions)) {
@@ -85,10 +92,10 @@
 <div class="controll">
     <form >
 
-        <label for="enddate">تاریخ پایان</label>
-        <input type="text" class="datePicker" id="startdate" name="startdate" autocomplete="off" >
-        <label for="startdate">تاریخ شروع</label>
-        <input type="text" class="datePicker" id="enddate" name="enddate"  autocomplete="off" >
+<!--        <label for="enddate">تاریخ پایان</label>-->
+        <input type="text" class="datePicker" id="startdate" name="startdate" autocomplete="off" placeholder="تاریخ شروع" >
+<!--        <label for="startdate">تاریخ شروع</label>-->
+        <input type="text" class="datePicker" id="enddate" name="enddate"  autocomplete="off" placeholder="تاریخ پایان" >
 <!--        <input type="text" class="date-picker" />-->
         <script src="scripts/jquery.min.js"></script>
         <script src="scripts/persian-date.min.js"></script>

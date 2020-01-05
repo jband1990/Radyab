@@ -28,4 +28,9 @@ function TodayTime($deviceid){
 //    return($list);
 }
 
+function getPositionByDate($strtdate,$enddate){
+    $query = LoadData('SELECT * FROM `position`WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
+
+}
+
 
