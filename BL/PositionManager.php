@@ -28,9 +28,23 @@ function TodayTime($deviceid){
 //    return($list);
 }
 
-function getPositionByDate($strtdate,$enddate){
+function getPositionByDate($startdate,$enddate){
     $query = LoadData('SELECT * FROM `position`WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
-
+    return $query;
 }
+function getPositionAsJson ($positions){
+    $positionsStr = '';
+    while ($row = mysqli_fetch_assoc($positions)) {
+//        { latLng: { lat: 32.62217, lng: 51.66471 }}
+        $positionsStr .= '{ latLng: { lat: ' .$row["latitude"].', lng:'.$row["longitude"].'}},';
+    }
+    $positionsStr ='['.rtrim($positionsStr,',').']';
+    return $positionsStr;
+}
+
+
+
+
+
 
 

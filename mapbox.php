@@ -67,23 +67,16 @@
         }else{
             $enddate='';
         }
-        $query = LoadData('SELECT * FROM `position`WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
+        $query =getPositionByDate($startdate,$enddate);
     }else{
-        $query = LoadData('SELECT * FROM `position`WHERE date(createdate)="' . date('y-m-d') . '"');
+        $query =TodayTime(8);
     }
-    $positions = getAllPosition(8);
-    $positionsStr = '';
-    while ($row = mysqli_fetch_assoc($positions)) {
-//        { latLng: { lat: 32.62217, lng: 51.66471 }}
-      $positionsStr .= '{ latLng: { lat: ' .$row["latitude"].', lng:'.$row["longitude"].'}},';
-    }
-    $positionsStr ='['.rtrim($positionsStr,',').']';
-//    $positionsStr='[]';
-    $lastposition=lastrecord(8);
-    $TodayDate=TodayTime(8);
+
+    $lastposition = lastrecord(8);
+
     ?>
     <script type="text/javascript">
-        var devicePositions =  <?=$positionsStr ?>
+        var devicePositions =  <?= getPositionAsJson($query) ?>
 //var devicePositions=[[51.66554,32.62231],[51.67116,32.62212]];
     </script>
 </head>
@@ -118,7 +111,14 @@
 <script> // create a HTML element for each feature
     var el = document.createElement('div');
     el.className = 'marker';
-    L.marker([<?= $lastposition['latitude'].','.$lastposition['longitude']?>], { title: "آخرین موقعیت" }).addTo(map);
+   <?php
+   mysqli_data_seek($query,0);
+   while ($row = mysqli_fetch_assoc($query)) {?>
+    var marker =  L.marker([<?=$row['latitude'].','.$row['longitude']?>], { title: "آخرین موقعیت" });
+    marker.bindPopup('This is Tutorialspoint').openPopup();
+    marker.addTo(map);
+    <?php }?>
+
 
 </script>
 </body>
