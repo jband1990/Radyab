@@ -34,9 +34,11 @@ function getPositionByDate($startdate,$enddate){
 }
 function getPositionAsJson ($positions){
     $positionsStr = '';
+    $i=0;
     while ($row = mysqli_fetch_assoc($positions)) {
 //        { latLng: { lat: 32.62217, lng: 51.66471 }}
         $positionsStr .= '{ latLng: { lat: ' .$row["latitude"].', lng:'.$row["longitude"].'}},';
+        $i++;
     }
     $positionsStr ='['.rtrim($positionsStr,',').']';
     return $positionsStr;

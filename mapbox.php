@@ -109,17 +109,48 @@
     });
 </script>
 <script> // create a HTML element for each feature
-    var el = document.createElement('div');
-    el.className = 'marker';
-   <?php
-   mysqli_data_seek($query,0);
-   while ($row = mysqli_fetch_assoc($query)) {?>
-    var marker =  L.marker([<?=$row['latitude'].','.$row['longitude']?>], { title: "آخرین موقعیت" });
-    marker.bindPopup('This is Tutorialspoint').openPopup();
-    marker.addTo(map);
-    <?php }?>
+//    var el = document.createElement('div');
+//    el.className = 'marker';
 
+//   mysqli_data_seek($query,0);
+//   while ($row = mysqli_fetch_assoc($query)) {?>
+//    var marker =  L.marker([<?//=$row['latitude'].','.$row['longitude']?>//], { title: "آخرین موقعیت" });
+//    {
+//    marker.bindPopup('This is Tutorialspoint').openPopup();
+//    marker.addTo(map);
 
+        CustomRouteLayer = MQ.Routing.RouteLayer.extend({
+            createStopMarker: function(location, stopNumber) {
+                var custom_icon,
+                    marker;
+
+                custom_icon = L.icon({
+                    iconUrl: 'https://www.mapquestapi.com/staticmap/geticon?uri=poi-red_1.png',
+                    iconSize: [20, 29],
+                    iconAnchor: [10, 29],
+                    popupAnchor: [0, -29]
+                });
+                 console.log(stopNumber);
+                console.log(this);
+                marker = L.marker(location.latLng, { icon: custom_icon })
+                    .bindPopup(location.adminArea5 + ' ' + location.adminArea3)
+                    .openPopup()
+                    .addTo(map);
+
+                return marker;
+            }
+        });
+
+        map.addLayer(new CustomRouteLayer({
+            directions: dir,
+            fitBounds: true,
+            draggable: false,
+            ribbonOptions: {
+                draggable: false,
+                ribbonDisplay: { color: '#CC0000', opacity: 0.3 },
+                widths: [ 15, 15, 15, 15, 14, 13, 12, 12, 12, 11, 11, 11, 11, 12, 13, 14, 15 ]
+            }
+        }));
 </script>
 </body>
 </html>
