@@ -23,6 +23,7 @@ function TodayTime($deviceid){
     $list=array();
     while($res=mysqli_fetch_assoc($query)){
         $list[]=array('lat'=>$res['latitude'],'long'=>$res['longitude']);
+        $listAllDetail=$res;
     }
 //    var_dump(json_encode($list));
 //    return($list);
@@ -32,6 +33,7 @@ function getPositionByDate($startdate,$enddate){
     $query = LoadData('SELECT * FROM `position`WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
     return $query;
 }
+
 function getPositionAsJson ($positions){
     $positionsStr = '';
     $i=0;
@@ -44,6 +46,18 @@ function getPositionAsJson ($positions){
     return $positionsStr;
 }
 
+function getPositionDetailsAsJson ($positions){
+    $positionsStr = '';
+    $i=0;
+    mysqli_data_seek ($positions,0);
+    while ($row = mysqli_fetch_assoc($positions)) {
+//        { latLng: { lat: 32.62217, lng: 51.66471 }}
+        $positionsStr .= '{ createDate:"' .$row["createDate"].'", speed:'.$row["speed"].'},';
+        $i++;
+    }
+    $positionsStr ='['.rtrim($positionsStr,',').']';
+    return $positionsStr;
+}
 
 
 

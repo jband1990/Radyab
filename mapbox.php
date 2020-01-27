@@ -76,7 +76,8 @@
 
     ?>
     <script type="text/javascript">
-        var devicePositions =  <?= getPositionAsJson($query) ?>
+        var devicePositions =  <?= getPositionAsJson($query) ?>;
+       var devicePositionsDet=<?= getPositionDetailsAsJson($query) ?>;
 //var devicePositions=[[51.66554,32.62231],[51.67116,32.62212]];
     </script>
 </head>
@@ -131,9 +132,10 @@
                     popupAnchor: [0, -29]
                 });
                  console.log(stopNumber);
-                console.log(this);
+                console.log(devicePositionsDet[stopNumber]);
+
                 marker = L.marker(location.latLng, { icon: custom_icon })
-                    .bindPopup(location.adminArea5 + ' ' + location.adminArea3)
+                    .bindPopup(devicePositionsDet[stopNumber-1].createDate + ' ' + devicePositionsDet[stopNumber-1].speed)
                     .openPopup()
                     .addTo(map);
 
