@@ -73,7 +73,6 @@
     }
 
     $lastposition = lastrecord(8);
-
     ?>
     <script type="text/javascript">
         var devicePositions =  <?= getPositionAsJson($query) ?>;
@@ -135,7 +134,7 @@
                 console.log(devicePositionsDet[stopNumber]);
 
                 marker = L.marker(location.latLng, { icon: custom_icon })
-                    .bindPopup(devicePositionsDet[stopNumber-1].createDate + ' ' + devicePositionsDet[stopNumber-1].speed)
+                    .bindPopup('در تاریخ :'+devicePositionsDet[stopNumber-1].createDate+' '+'در زمان :'+devicePositionsDet[stopNumber-1].createTime + ' سرعت شما:' + devicePositionsDet[stopNumber-1].speed)
                     .openPopup()
                     .addTo(map);
 
