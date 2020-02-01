@@ -3,7 +3,6 @@
 <html>
 <head>
     <meta charset='utf-8'/>
-    <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
@@ -24,9 +23,8 @@
             margin: 0;
             padding: 0;
            font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+            direction: rtl;
         }
-
-
         #map {
             position: absolute;
             top: 20%;
@@ -71,12 +69,13 @@
     }else{
         $query =TodayTime(8);
     }
-
     $lastposition = lastrecord(8);
+    $devicePositions=getPositionAsJson($query);
+    $devicePositionsDet=getPositionDetailsAsJson($query);
     ?>
     <script type="text/javascript">
-        var devicePositions =  <?= getPositionAsJson($query) ?>;
-       var devicePositionsDet=<?= getPositionDetailsAsJson($query) ?>;
+        var devicePositions =  <?=$devicePositions  ?>;
+        var devicePositionsDet = <?=$devicePositionsDet  ?>;
 //var devicePositions=[[51.66554,32.62231],[51.67116,32.62212]];
     </script>
 </head>
@@ -84,12 +83,12 @@
 <div id='map'></div>
 <div class="controll">
     <form >
-
 <!--        <label for="enddate">تاریخ پایان</label>-->
         <input type="text" class="datePicker" id="startdate" name="startdate" autocomplete="off" placeholder="تاریخ شروع" >
-<!--        <label for="startdate">تاریخ شروع</label>-->
+        <!--        <label for="startdate">تاریخ شروع</label>-->
         <input type="text" class="datePicker" id="enddate" name="enddate"  autocomplete="off" placeholder="تاریخ پایان" >
 <!--        <input type="text" class="date-picker" />-->
+        <input type="checkbox" name="speed" value="1"> سرعت غیر مجاز
         <script src="scripts/jquery.min.js"></script>
         <script src="scripts/persian-date.min.js"></script>
         <script src="scripts/persian-datepicker.min.js"></script>
@@ -102,7 +101,9 @@
     $(document).ready(function() {
         $(".datePicker").pDatepicker({
             initialValue: false,
-            "format":"l",'persianDigit':true
+            "format":"l",'persianDigit':true,
+            'position': [22,-95]
+
 
 
         });
@@ -128,16 +129,13 @@
                     iconUrl: 'https://www.mapquestapi.com/staticmap/geticon?uri=poi-red_1.png',
                     iconSize: [20, 29],
                     iconAnchor: [10, 29],
-                    popupAnchor: [0, -29]
+                    popupAnchor: [0, -29],
+                    size: 'md'
                 });
-                 console.log(stopNumber);
-                console.log(devicePositionsDet[stopNumber]);
-
                 marker = L.marker(location.latLng, { icon: custom_icon })
-                    .bindPopup('در تاریخ :'+devicePositionsDet[stopNumber-1].createDate+' '+'در زمان :'+devicePositionsDet[stopNumber-1].createTime + ' سرعت شما:' + devicePositionsDet[stopNumber-1].speed)
+                    .bindPopup('در تاریخ :'+devicePositionsDet[stopNumber-1].createDate+' '+'در زمان :'+devicePositionsDet[stopNumber-1].createTime + ' سرعت شما :' + devicePositionsDet[stopNumber-1].speed +' '+'کیلومتر بر ساعت')
                     .openPopup()
                     .addTo(map);
-
                 return marker;
             }
         });
