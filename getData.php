@@ -12,7 +12,6 @@
     $list= scandir('device');
     unset($list[0]);
     unset($list[1]);
-
     //seperate recivied locations
     foreach ($list as $file){
         $fileExpolde=explode('.',$file);
@@ -34,7 +33,7 @@
         $listPosition=explode('---',$content);
 
         //var_dump($fileExpolde);
-        //var_dump($listPosition);
+        var_dump($listPosition);
         //die();
         foreach ($listPosition as $index => $position) {
 
@@ -48,7 +47,7 @@
             preg_match('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/', $listPosition [$index][4], $result);
             //print_r($result);
             $date = $result[1] . '-' . $result[2] . '-' . $result[3] . ' ' . $result[4] . ':' . $result[5] . ':' . $result[6];
-            // die();
+            var_dump($result[1]);
             //change lat & lang to google coordination
             $longitude = substr($listPosition[$index][1],0,2)+substr($listPosition[$index][1],2,6)/60;
             $latitude = substr($listPosition[$index][2],0,2)+substr($listPosition[$index][2],2,6)/60;

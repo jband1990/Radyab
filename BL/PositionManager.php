@@ -32,7 +32,7 @@ function TodayTime($deviceid){
 }
 
 function getPositionByDate($startdate,$enddate){
-    $query = LoadData('SELECT *,Time(createDate) as `createTime`,date(createDate) as `createDate` FROM `position`WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
+    $query = LoadData('SELECT *,Time(createDate) as `createTime`,date(createDate) as `createDate` FROM `position` WHERE date(createdate)>="'.$startdate .'" and date(createdate)<= "'.$enddate.'"');
     return $query;
 }
 
@@ -49,13 +49,13 @@ function getPositionAsJson ($positions){
 }
 
 function getPositionDetailsAsJson ($positions){
-    $persian_calendar=new persian_calendar();
+
     $positionsStr = '';
     $i=0;
     mysqli_data_seek ($positions,0);
     while ($row = mysqli_fetch_assoc($positions)) {
 //        { latLng: { lat: 32.62217, lng: 51.66471 }}
-        $positionsStr .= '{ createDate:"' .$persian_calendar->date_g2p($row["createDate"]).'",createTime:"'.$row["createTime"].'",speed:'.$row["speed"].'},';
+        $positionsStr .= '{ createDate:"' .getShamsidate($row["createDate"]).'",createTime:"'.$row["createTime"].'",speed:'.$row["speed"].'},';
         $i++;
     }
     $positionsStr ='['.rtrim($positionsStr,',').']';
@@ -63,6 +63,16 @@ function getPositionDetailsAsJson ($positions){
     return $positionsStr;
 }
 
+
+
+function getShamsidate($mdate){
+    $persian_calendar=new persian_calendar();
+    $dataParts= explode('-',$mdate);
+    $pdate = $persian_calendar->g2p($dataParts[0],$dataParts[1],$dataParts[2]);
+    $persian_calendar = null;
+    return $pdate[0].'/'.$pdate[1].'/'.$pdate[2];
+
+}
 
 
 
