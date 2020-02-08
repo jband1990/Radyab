@@ -22,7 +22,7 @@ function lastrecord($deviceId){
 
 function TodayTime($deviceid){
     $query = LoadData('SELECT * ,Time(createDate) as `createTime`,date(createDate) as `createDate` FROM `position`WHERE date(createdate)="' . date('y-m-d') . '"');
-
+    return($query);
     $list=array();
     while($res=mysqli_fetch_assoc($query)){
         $list[]=array('lat'=>$res['latitude'],'long'=>$res['longitude']);
