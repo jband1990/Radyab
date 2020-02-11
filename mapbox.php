@@ -109,6 +109,7 @@
             initialValue: false,
             "format":"l",'persianDigit':true,
             'position': [22,-95]
+
         });
     });
 </script>

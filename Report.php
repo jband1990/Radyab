@@ -12,7 +12,7 @@
                 var map = new Microsoft.Maps.Map('#map',{
                 credentials: 'ArEIhVba9nPri81YH_rHpDnvhCUtUn7WdKUte8NR5paEfk_iH9sfrF796EtOAO_L',
                     center: new Microsoft.Maps.Location(40.76414,-74.07132 ),
-                    zoom: 5
+                    zoom: 10
             });
                /* var center = map.getCenter();
 
