@@ -6,7 +6,7 @@ var map,
 
 map = L.map('map', {
     layers: MQ.mapLayer(),
-    center: [ 32.62432, 51.68115 ],
+    center: [32.62432, 51.68115],
     zoom: 12,
 });
 

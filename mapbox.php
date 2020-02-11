@@ -1,4 +1,9 @@
-
+<?php
+    session_start();
+    if (!isset($_SESSION['id'])) {
+        header('location:login.php');
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +71,7 @@
             $enddate='';
         }
         $query =getPositionByDate($startdate,$enddate);
+
     }else{
         $query =TodayTime(8);
     }
@@ -103,9 +109,6 @@
             initialValue: false,
             "format":"l",'persianDigit':true,
             'position': [22,-95]
-
-
-
         });
     });
 </script>
