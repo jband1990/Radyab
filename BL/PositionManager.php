@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: msi
- * Date: 11/27/2019
- * Time: 10:42 PM
- */
 require_once 'DAL/Db.php';
 require_once 'persian_calendar.php';
 function getAllPosition($deviceId)
@@ -15,17 +9,16 @@ function getAllPosition($deviceId)
 
 function lastrecord($deviceId)
 {
-    $query = 'SELECT * FROM `position` WHERE `deviceId` = ' . $deviceId . ' ORDER BY `createDate` DESC';
+    $query = 'SELECT  *,Time(createDate) AS
+    `createTime`,date(createDate) AS
+     `createDate` FROM `position` WHERE `deviceId` = ' . $deviceId . ' ORDER BY `createDate` DESC  limit 1';
     $data = LoadData($query);
-    $result = mysqli_fetch_assoc($data);
-    return ($result);
+    return ($data);
 }
 
 function TodayTime($deviceid)
 {
     $query = LoadData('SELECT * ,Time(createDate) AS `createTime`,date(createDate) AS
-    `createDate` FROM `position` WHERE date(createdate)="' . date('yy-d-m') . '"');
-    var_dump('SELECT * ,Time(createDate) AS `createTime`,date(createDate) AS
     `createDate` FROM `position` WHERE date(createdate)="' . date('yy-d-m') . '"');
     return ($query);
     $list = array();
@@ -77,8 +70,8 @@ function getPositionDetailsAsJson($positions)
 function getShamsidate($mdate)
 {
     $persian_calendar = new persian_calendar();
-    $dataParts = explode('-', $mdate);
-    $pdate = $persian_calendar->g2p($dataParts[0], $dataParts[1], $dataParts[2]);
+    $dateParts = explode('-', $mdate);
+    $pdate = $persian_calendar->g2p($dateParts[0], $dateParts[1], $dateParts[2]);
     $persian_calendar = null;
     return $pdate[0] . '/' . $pdate[1] . '/' . $pdate[2];
 
