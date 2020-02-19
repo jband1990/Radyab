@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: msi
- * Date: 11/27/2019
- * Time: 10:43 PM
- */
 $connection = connectToDb();
 function connectToDb()
 {

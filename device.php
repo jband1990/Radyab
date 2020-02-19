@@ -160,7 +160,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input style="margin-right:250px; font-size:20px;" onclick="isvalid(event)" type="submit"
+                    <input style="margin-right:190px; font-size:20px;" onclick="isvalid(event)" type="submit"
                            value="ذخیره اطلاعات" name="submit"></td>
             </tr>
         </table>

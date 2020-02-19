@@ -77,7 +77,7 @@ if (!isset($_SESSION['id'])) {
             background-color: green;
             color:#fff;
             font-size: 25px;
-            margin-right: 230px;
+            margin-right: 400px;
             border-radius: 5px;
 
         }
@@ -92,12 +92,12 @@ if (!isset($_SESSION['id'])) {
        </div>
 
     <div style="margin:20px auto;background-color:#fff;border:1px solid #777;box-shadow: 14px 13px 10px #999;padding-bottom:20px;position:absolute;top:60px;bottom:60px;left:0px;right:0px;direction:rtl">
-        <table style="border:3px solid #ccc;width:600px;margin-top:40px;margin-right:20px;padding:10px;font-size: 25px;">
-        <tr>
+        <table style="border:3px solid #ccc;width:900px;height:150px;margin-top:40px;margin-right:20px;padding:10px;font-size: 25px;">
+        <tr style="font-size: 23px;">
             <th>شماره</th>
             <th>شناسه</th>
             <th>نام دستگاه</th>
-            <th>گزارش خلافی</th>
+            <th>گزارش خارج از محدوده</th>
             <th>گزارش محل فعلی</th>
             <th> گزارش تردد</th>
         </tr>
@@ -111,9 +111,9 @@ if (!isset($_SESSION['id'])) {
                       <td>'.$i.'</td>
                       <td>'.$res['code'].'</td>
                       <td>'.$res['name'].'</td>
-                      <td><a href="#">گزارش خلافی</a></td>
-                      <td><a href="#">گزارش محل فعلی</a></td>
-                      <td><a href="#">گزارش تردد</a></td>
+                      <td><a href="/radyab/mapbox.php?deviceId='.$res['id'].'&action=0">گزارش خارج از محدوده</a></td>
+                      <td><a href="/radyab/mapbox.php?deviceId='.$res['id'].'&action=1">گزارش محل فعلی</a></td>
+                      <td><a href="/radyab/mapbox.php?deviceId='.$res['id'].'&action=2">گزارش تردد</a></td>
                   </tr>
             ';
         }
