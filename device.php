@@ -142,6 +142,8 @@
 <div class="menu">
     <a href="signup.php">ثبت نام</a>
     <a href="login.php">ورود به سیستم</a>
+    <a href="logout.php" title="Logout">خروج از سیستم</a>
+
 </div>
 
 <div style="margin:20px auto;background-color:#fff;border:1px solid #777;box-shadow: 14px 13px 10px #999;padding-bottom:20px;position:absolute;top:60px;bottom:60px;left:0px;right:0px;direction:rtl">
