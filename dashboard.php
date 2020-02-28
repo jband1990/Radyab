@@ -102,8 +102,13 @@ require_once 'DAL/Db.php';
 
 </div>
 
+<<<<<<< HEAD
 <div style="margin:20px auto;background-color:#fff;border:1px solid #777;box-shadow: 14px 13px 10px #999;padding-bottom:20px;position:absolute;top:60px;bottom:60px;left:0px;right:0px;direction:rtl">
     <table style="border:3px solid #ccc;width:900px;height:150px;margin-top:40px;margin-right:20px;padding:10px;font-size: 25px;">
+=======
+    <div style="margin:20px auto;background-color:#fff;border:1px solid #777;box-shadow: 14px 13px 10px #999;padding-bottom:20px;position:absolute;top:60px;bottom:60px;left:0px;right:0px;direction:rtl">
+        <table style="border:3px solid #ccc;width:900px;height:150px;margin-top:40px;margin-right:20px;padding:10px;font-size: 25px;">
+>>>>>>> 18d2229a3d62a79ba992b6a693539e15c65c34b9
         <tr style="font-size: 23px;">
             <th>شماره</th>
             <th>شناسه</th>
@@ -119,12 +124,21 @@ require_once 'DAL/Db.php';
         while ($res = mysqli_fetch_assoc($query)) {
             $i++;
             echo '<tr>
+<<<<<<< HEAD
                       <td>' . $i . '</td>
                       <td>' . $res['code'] . '</td>
                       <td>' . $res['name'] . '</td>
                       <td><a href="/radyab/mapbox.php?deviceId=' . $res['id'] . '&action=0">گزارش خارج از محدوده</a></td>
                       <td><a href="/radyab/mapbox.php?deviceId=' . $res['id'] . '&action=1">گزارش محل فعلی</a></td>
                       <td><a href="/radyab/mapbox.php?deviceId=' . $res['id'] . '&action=2">گزارش تردد</a></td>
+=======
+                      <td>'.$i.'</td>
+                      <td>'.$res['code'].'</td>
+                      <td>'.$res['name'].'</td>
+                      <td><a href="/radyab/mapbox.php?deviceId='.$res['id'].'&action=0">گزارش خارج از محدوده</a></td>
+                      <td><a href="/radyab/mapbox.php?deviceId='.$res['id'].'&action=1">گزارش محل فعلی</a></td>
+                      <td><a href="/radyab/mapbox.php?deviceId='.$res['id'].'&action=2">گزارش تردد</a></td>
+>>>>>>> 18d2229a3d62a79ba992b6a693539e15c65c34b9
                   </tr>
             ';
         }
